@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xG Pitch Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>xG playground by <a href="https://x.com/Hossam_Hal9" target="_blank">@Hossam_Hal9</a></h1>
+            
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel - Controls -->
+            <div class="left-panel">
+                <!-- Shot Context Section -->
+                <div class="control-section">
+                    <h3>Shot context</h3>
+                    
+                    <!-- Body Part Selection -->
+                    <div class="control-group">
+                        <label>Body part</label>
+                        <div class="button-group">
+                            <button class="control-btn" data-body="RightFoot">RightFoot</button>
+                            <button class="control-btn" data-body="LeftFoot">LeftFoot</button>
+                            <button class="control-btn" data-body="Head">Head</button>
+                            <button class="control-btn" data-body="OtherBodyPart">OtherBodyPart</button>
+                        </div>
+                    </div>
+
+                    <!-- Situation Selection -->
+                    <div class="control-group">
+                        <label>Situation</label>
+                        <div class="button-group">
+                            <button class="control-btn" data-situation="OpenPlay">OpenPlay</button>
+                            <button class="control-btn" data-situation="SetPiece">SetPiece</button>
+                            <button class="control-btn" data-situation="Counter">Counter</button>
+                        </div>
+                    </div>
+
+                    <!-- Game State Selection -->
+                    <div class="control-group">
+                        <label>Game state</label>
+                        <div class="button-group">
+                            <button class="control-btn" data-state="Drawing">Drawing</button>
+                            <button class="control-btn" data-state="Winning">Winning</button>
+                            <button class="control-btn" data-state="Losing">Losing</button>
+                        </div>
+                    </div>
+
+                    <!-- Minute Slider -->
+                    <div class="control-group">
+                        <label>Minute: <span id="minute-value">60</span></label>
+                        <input type="range" id="minute-slider" min="0" max="120" value="60" class="slider">
+                    </div>
+
+                    <!-- Home Team Checkbox -->
+                    <div class="control-group checkbox-group">
+                        <input type="checkbox" id="home-team" checked>
+                        <label for="home-team">Home team</label>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-actions">
+                    <button class="btn btn-warning" id="clear-shots">Clear shots</button>
+                    <button class="btn btn-primary" id="download-csv">Download CSV</button>
+                </div>
+
+                <!-- CSV Upload Section -->
+                <div class="control-section">
+                    <label>Upload CSV (x,y required)</label>
+                    <input type="file" id="csv-upload" accept=".csv">
+                </div>
+
+                <!-- Footer -->
+                <div class="footer-text">
+                    <p>Modified by <a href="https://x.com/Hossam_Hal9" target="_blank">@Hossam_Hal9</a> | </p>
+                    
+                </div>
+            </div>
+
+            <!-- Right Panel - Pitch Visualization -->
+            <div class="right-panel">
+                <div class="pitch-container">
+                    <svg class="pitch" id="pitch-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                        <!-- Pitch lines -->
+                        <rect x="5" y="5" width="90" height="90" fill="none" stroke="white" stroke-width="0.5"/>
+                        
+                        <!-- Center line -->
+                        <line x1="50" y1="5" x2="50" y2="95" stroke="white" stroke-width="0.5"/>
+                        
+                        <!-- Center circle -->
+                        <circle cx="50" cy="50" r="9" fill="none" stroke="white" stroke-width="0.5"/>
+                        <circle cx="50" cy="50" r="0.5" fill="white"/>
+                        
+                        <!-- Left penalty area -->
+                        <rect x="5" y="25" width="16" height="50" fill="none" stroke="white" stroke-width="0.5"/>
+                        
+                        <!-- Left goal area -->
+                        <rect x="5" y="35" width="8" height="30" fill="none" stroke="white" stroke-width="0.5"/>
+                        
+                        <!-- Right penalty area -->
+                        <rect x="79" y="25" width="16" height="50" fill="none" stroke="white" stroke-width="0.5"/>
+                        
+                        <!-- Right goal area -->
+                        <rect x="87" y="35" width="8" height="30" fill="none" stroke="white" stroke-width="0.5"/>
+                        
+                        <!-- Left corner arcs -->
+                        <circle cx="5" cy="5" r="1" fill="none" stroke="white" stroke-width="0.5"/>
+                        <circle cx="5" cy="95" r="1" fill="none" stroke="white" stroke-width="0.5"/>
+                        
+                        <!-- Right corner arcs -->
+                        <circle cx="95" cy="5" r="1" fill="none" stroke="white" stroke-width="0.5"/>
+                        <circle cx="95" cy="95" r="1" fill="none" stroke="white" stroke-width="0.5"/>
+                    </svg>
+                    
+                    <!-- Shots overlay -->
+                    <div class="shots-container" id="shots-container"></div>
+                    
+                    <!-- Instruction text -->
+                    <div class="pitch-instruction">Click on the pitch to add a shot</div>
+                </div>
+
+                <!-- Pitch Controls -->
+                <div class="pitch-controls">
+                    <button class="control-btn" data-axis="x">x</button>
+                    <button class="control-btn" data-axis="y">y</button>
+                    <button class="control-btn" data-axis="xG">xG</button>
+                    <button class="control-btn" data-axis="body">body</button>
+                    <button class="control-btn" data-axis="situation">situation</button>
+                    <button class="control-btn" data-axis="state">state</button>
+                    <button class="control-btn" data-axis="home">home</button>
+                    <button class="control-btn" data-axis="min">min</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
